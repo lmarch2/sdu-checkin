@@ -9,12 +9,6 @@
 
 Self-hosted multi-user attendance automation service with a small web console, per-account schedules, manual runs, local logs, and Docker deployment.
 
-This repository is intentionally sanitized for source control:
-
-- no real upstream endpoint is embedded
-- no default admin password is embedded
-- no runtime database or encryption key is tracked
-
 ## Highlights
 
 - Multi-account management with independent schedules
@@ -99,7 +93,6 @@ See [.env.example](./.env.example) for a safe template.
 - This project is meant for self-hosting, not direct public exposure.
 - Default Docker publishing binds to `127.0.0.1` only.
 - If you expose it to other machines, put it behind HTTPS and set `CHECKIN_AUTH_COOKIE_SECURE=true`.
-- Runtime secrets and local state should stay in `.env` and `data/`, both excluded from Git.
 - Use this only against systems you are authorized to automate.
 
 ## Project Structure
@@ -132,6 +125,5 @@ python3 -m unittest discover -s tests
 
 ## Operational Notes
 
-- `data/checkin.db` and `data/fernet.key` are runtime artifacts and should not be committed.
 - Moving the service to another machine requires migrating both the database and Fernet key if you want existing encrypted credentials to remain usable.
 - The scheduler is in-process; do not run multiple active instances against the same database unless you add leader election or locking.
